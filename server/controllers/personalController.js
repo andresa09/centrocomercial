@@ -1,6 +1,7 @@
 //ES DONDE VAN A ESTAR LA FUNCIONES QUE DEFINEN LAS PETICIONES HTTP (CRUD)
 const mongoose = require('mongoose');
-const Personal = require('../models/personalModel') //ACA SE LLAMA LO QUE ESTA EN EL ARCHIVO MODEL (EL ESCHEMA)
+const express = require('express');
+const Personal = require('../models/personalModel'); //ACA SE LLAMA LO QUE ESTA EN EL ARCHIVO MODEL (EL ESCHEMA)
 
 
 
