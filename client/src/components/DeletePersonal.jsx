@@ -1,6 +1,26 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
+import {MdDeleteForever} from 'react-icons/md';
 
 const DeletePersonal = () => {
+
+  const urlAllPersonal = 'http://localhost:8080/ccviva/all';
+
+  const [data,setData] = useState([]);
+
+  useEffect(() => {
+    peticionesGet()
+  }, [])
+
+  const peticionesGet = () =>{
+    axios.get(urlAllPersonal)
+    .then(response=>{
+      setData(response.data)
+      
+    })
+  }
+
+
   return (
     <div>
       <h3 className='m-2'>Eliminar Personal</h3>
@@ -15,23 +35,16 @@ const DeletePersonal = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>22</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
+          {data.map(personal=>{
+            return( 
+              <tr key={personal._id}>
+                <td>{personal.nombre}</td>
+                <td>{personal.documento}</td>
+                <td>{personal.cargo}</td>
+                <td><MdDeleteForever/>Eliminar</td>
+              </tr>
+            )
+           })}
           </tbody>
         </table>
     </div>

@@ -35,19 +35,20 @@ const findByIdPersonal = (req,res)=>{
 //METODO CREA UN REGISTRO (AÑADIR)(POST)
 
 const createPersonal =(req,res)=>{
-    let personalNew = new Personal({
+    let PersonalNew = new Personal({
         nombre: req.body.nombre,
         apellido: req.body.apellido,
         documento: req.body.documento,
         cargo: req.body.cargo
     })
 
-    let mensaje = "PERSONAL CARGADO CORRECTAMENTEº"
 
-    personalNew.save((err,mensaje)=>{
-        err && res.status(500).send(err)
 
-        res.status(200).json(mensaje)
+    
+    PersonalNew.save((err,personalNew)=>{
+        err && res.status(500).send(err.message)
+
+        res.status(200).json(personalNew)
     })
 
 }
