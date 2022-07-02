@@ -1,9 +1,12 @@
+import '../styles/fondo.css'
+
 //useState guarda un estado inicial de la aplicacion
 //useEffect ejecuta el codigo que esta dentro del useEffect 
 import React,{useState,useEffect} from 'react';
 //para consumir las API
 import axios from 'axios';
 //GET
+
 
 const AllPersonal = () => {
   
@@ -25,8 +28,11 @@ const AllPersonal = () => {
 
   return (
     <>
-      <h3 className='m-2'>Listado de Personal</h3>
-      <table className="table">
+      <div className='fondo'>
+
+      
+      <h3 className='mt-2 text-light'>Listado de Personal</h3>
+      <table className="table table-secondary">
           <thead>
             <tr>
               
@@ -49,6 +55,7 @@ const AllPersonal = () => {
            })}
           </tbody>
         </table>
+        </div>
     </>
   )
 }

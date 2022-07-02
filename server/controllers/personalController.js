@@ -46,8 +46,7 @@ const createPersonal =(req,res)=>{
 
     
     PersonalNew.save((err,personalNew)=>{
-        err && res.status(500).send(err.message)
-
+        err && res.status(500).send(err.message);
         res.status(200).json(personalNew)
     })
 

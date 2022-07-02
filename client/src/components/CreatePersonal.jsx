@@ -1,10 +1,11 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 
+const urlCreatePersonal = "http://localhost:8080/ccviva/sendRegister";
+const urlAllPersonal = "http://localhost:8080/ccviva/all";
+
+
 const CreatePersonal = () => {
-  
-  const urlCreatePersonal = 'http://localhost:8080/ccviva/sendRegister';
-  const urlAllPersonal = 'http://localhost:8080/ccviva/all';
 
   //PARA EL ARRAY PARA LA PETICION GET   
   const [data,setData] = useState([]);
@@ -17,28 +18,6 @@ const CreatePersonal = () => {
     cargo:''
   });
 
-
-  //PARA ENVIAR LOS DATOS   
-  const peticionPost = async(evento) =>{
-    //preventDefault sirve para que la pagina no se refresque (comportamiento natural del formulario)
-    evento.preventDefault()
-    await axios.post(urlCreatePersonal,seleccionado)
-    .then(response=>{
-      setData(data.concat(response.data))
-    })
-    setSeleccionado('')
-  }
-
-  //FUNCION PARA CAPTURAR LOS DATOS DEL INPUT 
-  const valueInput = (evento) =>{
-    const {name,value}=evento.target;
-    setSeleccionado(prevState=>({
-    ...prevState,
-    [name]: value
-    })
-    )
-  }
-
   const peticionesGet = () =>{
     axios.get(urlAllPersonal)
     .then(response=>{
@@ -46,6 +25,37 @@ const CreatePersonal = () => {
       
     })
   }
+
+
+
+  //PARA ENVIAR LOS DATOS   
+  const peticionPost = async(e) =>{
+    //preventDefault sirve para que la pagina no se refresque (comportamiento natural del formulario)
+    // e.preventDefault()
+    await axios.post(urlCreatePersonal,seleccionado)
+    .then(response=>{
+      setData(data.concat(response.data))
+    })
+    console.log(seleccionado)
+    setSeleccionado({
+      nombre:'',
+      apellido:'',
+      documento:'',
+      cargo:''
+    })
+    console.log(seleccionado)
+  }
+
+  //FUNCION PARA CAPTURAR LOS DATOS DEL INPUT 
+  const valueInput = (e) =>{
+    const {name,value}=e.target;
+    setSeleccionado(prevState=>({
+    ...prevState,
+    [name]: value
+    })
+    )
+  }
+
 
   useEffect(() => {
     peticionesGet()
@@ -62,22 +72,22 @@ const CreatePersonal = () => {
       <form onSubmit={peticionPost} className='w-50 mx-auto mt-4'>
         <div className="mb-3">
             <label className="form-label">NOMBRE</label>
-            <input required onChange={valueInput} type="text" className="form-control" />
+            <input name="nombre" required onChange={valueInput} type="text" className="form-control" />
         </div>
         <div className="mb-3">
             <label className="form-label">APELLIDO</label>
-            <input required onChange={valueInput} type="text" className="form-control"/>
+            <input name="apellido" required onChange={valueInput} type="text" className="form-control"/>
         </div>
         <div className="mb-3">
             <label className="form-label">DOCUMENTO</label>
-            <input required onChange={valueInput} type="number" min={1} className="form-control"/>
+            <input name="documento" required onChange={valueInput} type="text" className="form-control"/>
         </div>
         <div className="mb-3">
             <label className="form-label">CARGO</label>
-            <input required onChange={valueInput} type="text" className="form-control"/>
+            <input name="cargo" required onChange={valueInput} type="text" className="form-control"/>
         </div>
 
-        <button type="submit" className="btn btn-primary">ENVIAR</button>
+        <button type="submit" className="btn btn-dark">ENVIAR</button>
         </form>
 
     </div>

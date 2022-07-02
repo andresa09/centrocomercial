@@ -1,3 +1,4 @@
+//TODOS LOS COMPONENTES LAS DIRECCIONES PARA NAVEGAR ENTRE LAS VISTAS
 import React, { Fragment } from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import AllPersonal from "./components/AllPersonal";
@@ -8,6 +9,7 @@ import NotFound from './components/NotFound';
 import Navbar from './components/Navbar';
 
 
+//QUIEN RETORNA TODOS LOS COMPONENTES
 function App() {
   return (
     <Fragment>
